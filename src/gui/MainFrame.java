@@ -47,10 +47,10 @@ public class MainFrame extends JFrame {
         JPanel buttonPanel = new JPanel(new GridLayout(2, 2, 20, 20));
         buttonPanel.setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
         
-        JButton btnAlunos = createStyledButton("Gerenciar Alunos", "👨‍🎓");
-        JButton btnProfessores = createStyledButton("Gerenciar Professores", "👨‍🏫");
-        JButton btnDisciplinas = createStyledButton("Gerenciar Disciplinas", "📚");
-        JButton btnMatriculas = createStyledButton("Gerenciar Matrículas", "📋");
+        JButton btnAlunos = createStyledButton("Gerenciar Alunos", "");
+        JButton btnProfessores = createStyledButton("Gerenciar Professores", "");
+        JButton btnDisciplinas = createStyledButton("Gerenciar Disciplinas", "");
+        JButton btnMatriculas = createStyledButton("Gerenciar Matrículas", "");
         
         buttonPanel.add(btnAlunos);
         buttonPanel.add(btnProfessores);
@@ -70,11 +70,11 @@ public class MainFrame extends JFrame {
     }
     
     private JButton createStyledButton(String text, String icon) {
-        JButton button = new JButton("<html><center>" + icon + "<br>" + text + "</center></html>");
+        JButton button = new JButton(text);
         button.setFont(new Font("Arial", Font.BOLD, 14));
         button.setPreferredSize(new Dimension(200, 80));
         button.setBackground(new Color(70, 130, 180));
-        button.setForeground(Color.WHITE);
+        button.setForeground(Color.BLACK);
         button.setFocusPainted(false);
         button.setBorder(BorderFactory.createRaisedSoftBevelBorder());
         

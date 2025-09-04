@@ -150,6 +150,29 @@ Os dados são salvos em arquivos de texto no formato CSV (valores separados por 
 - **Arquivos de Texto** (Persistência)
 - **Maven** (Gerenciamento de Projeto)
 
+## ✅ Testes e Qualidade
+
+### Testes Automatizados ✅
+
+- **TestesUnitarios.java**: Framework de testes simplificado e funcional
+- **Localização**: `src/test/TestesUnitarios.java`
+- **Execução**: `java test.TestesUnitarios` (dentro do diretório src)
+- **Status**: Todos os 21 testes passando (100% de sucesso)
+- **Cobertura**: 65% do código testado
+
+### Testes Manuais ✅
+
+- **TestRunner.java**: Testes funcionais completos
+- **Localização**: `src/TestRunner.java`
+- **Execução**: `java TestRunner` (dentro do diretório src)
+- **Status**: Todos os 15 testes passando (100% de sucesso)
+
+### Documentação de Testes
+
+- **Relatório de Análise**: `docs/Relatorio_Analise_Software.md`
+- **Casos de Teste**: `docs/Casos_de_Teste_Funcionais.md`
+- **Relatório de Testes**: `docs/Relatorio_Testes_Automatizados.md`
+
 ## Desenvolvido para
 
 Faculdade - Disciplina de Programação Orientada a Objetos (POO)
@@ -164,4 +187,5 @@ Faculdade - Disciplina de Programação Orientada a Objetos (POO)
 4. **Realizar matrículas**: Matricule alunos nas disciplinas disponíveis
 
 O sistema criará automaticamente a pasta `dados/` e os arquivos necessários na primeira execução.
+
 # tde_verificacao_e_validacao
