@@ -164,3 +164,4 @@ Faculdade - Disciplina de Programação Orientada a Objetos (POO)
 4. **Realizar matrículas**: Matricule alunos nas disciplinas disponíveis
 
 O sistema criará automaticamente a pasta `dados/` e os arquivos necessários na primeira execução.
+# tde_verificacao_e_validacao
