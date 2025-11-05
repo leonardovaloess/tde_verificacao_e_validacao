@@ -1,5 +1,0 @@
-1;Leonardo;3120932019;leo@gmail.com;4199999999
-2;Pedro Costa;TEST001;pedro@teste.com;(11) 11111-1111
-6;Pedro Costa;TEST001;pedro@teste.com;(11) 11111-1111
-7;Ana Silva;TEST002;ana@teste.com;(11) 22222-2222
-9;Ana Silva;TEST002;ana@teste.com;(11) 22222-2222

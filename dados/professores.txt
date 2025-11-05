@@ -1,5 +1,0 @@
-1;abimael;30920932;abimael@gmail.com;ti
-2;Dr. Carlos Mendes;TESTPROF001;carlos@universidade.edu;Matemática
-3;Dr. Carlos Mendes;TESTPROF001;carlos@universidade.edu;Matemática
-4;Dr. Carlos Mendes;TESTPROF001;carlos@universidade.edu;Matemática
-5;Dr. Carlos Mendes;TESTPROF001;carlos@universidade.edu;Matemática

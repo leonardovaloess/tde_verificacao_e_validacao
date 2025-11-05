@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="JUnit Jupiter" tests="18" skipped="0" failures="0" errors="0" time="0.042" hostname="Gabriels-MacBook-Air.local" timestamp="2025-11-05T10:59:40">
+<properties>
+<property name="apple.awt.application.name" value="ConsoleLauncher"/>
+<property name="file.encoding" value="UTF-8"/>
+<property name="file.separator" value="/"/>
+<property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+<property name="http.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+<property name="java.class.path" value="lib/junit-platform-console-standalone-1.9.2.jar"/>
+<property name="java.class.version" value="68.0"/>
+<property name="java.home" value="/Users/gabrielkraussselenko/Library/Java/JavaVirtualMachines/openjdk-24.0.2+12-54/Contents/Home"/>
+<property name="java.io.tmpdir" value="/var/folders/0l/5rbsngkj3fl3s4cdzm380dk00000gn/T/"/>
+<property name="java.library.path" value="/Users/gabrielkraussselenko/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
+<property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+<property name="java.runtime.version" value="24.0.2+12-54"/>
+<property name="java.specification.name" value="Java Platform API Specification"/>
+<property name="java.specification.vendor" value="Oracle Corporation"/>
+<property name="java.specification.version" value="24"/>
+<property name="java.vendor" value="Oracle Corporation"/>
+<property name="java.vendor.url" value="https://java.oracle.com/"/>
+<property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+<property name="java.version" value="24.0.2"/>
+<property name="java.version.date" value="2025-07-15"/>
+<property name="java.vm.compressedOopsMode" value="Zero based"/>
+<property name="java.vm.info" value="mixed mode, sharing"/>
+<property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+<property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+<property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+<property name="java.vm.specification.version" value="24"/>
+<property name="java.vm.vendor" value="Oracle Corporation"/>
+<property name="java.vm.version" value="24.0.2+12-54"/>
+<property name="jdk.debug" value="release"/>
+<property name="line.separator" value="
+"/>
+<property name="native.encoding" value="UTF-8"/>
+<property name="os.arch" value="aarch64"/>
+<property name="os.name" value="Mac OS X"/>
+<property name="os.version" value="26.0.1"/>
+<property name="path.separator" value=":"/>
+<property name="socksNonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
+<property name="stderr.encoding" value="UTF-8"/>
+<property name="stdout.encoding" value="UTF-8"/>
+<property name="sun.arch.data.model" value="64"/>
+<property name="sun.boot.library.path" value="/Users/gabrielkraussselenko/Library/Java/JavaVirtualMachines/openjdk-24.0.2+12-54/Contents/Home/lib"/>
+<property name="sun.cpu.endian" value="little"/>
+<property name="sun.io.unicode.encoding" value="UnicodeBig"/>
+<property name="sun.java.command" value="lib/junit-platform-console-standalone-1.9.2.jar --class-path target/classes:target/test-classes --select-class CasosDeTesteJUnit --reports-dir=target/test-reports"/>
+<property name="sun.java.launcher" value="SUN_STANDARD"/>
+<property name="sun.jnu.encoding" value="UTF-8"/>
+<property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+<property name="user.country" value="BR"/>
+<property name="user.dir" value="/Users/gabrielkraussselenko/Documents/tde_verificacao_e_validacao"/>
+<property name="user.home" value="/Users/gabrielkraussselenko"/>
+<property name="user.language" value="pt"/>
+<property name="user.name" value="gabrielkraussselenko"/>
+<property name="user.timezone" value="America/Sao_Paulo"/>
+</properties>
+<testcase name="testCT010_CadastroDisciplinaCargaHorariaAcimaLimite()" classname="CasosDeTesteJUnit" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:CasosDeTesteJUnit]/[method:testCT010_CadastroDisciplinaCargaHorariaAcimaLimite()]
+display-name: CT010 - Cadastro de disciplina com carga horária acima do limite
+]]></system-out>
+</testcase>
+<testcase name="testCT017_EdicaoAlunoExistente()" classname="CasosDeTesteJUnit" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:CasosDeTesteJUnit]/[method:testCT017_EdicaoAlunoExistente()]
+display-name: CT017 - Edição de aluno existente
+]]></system-out>
+</testcase>
+<testcase name="testCT018_ExclusaoAluno()" classname="CasosDeTesteJUnit" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:CasosDeTesteJUnit]/[method:testCT018_ExclusaoAluno()]
+display-name: CT018 - Exclusão de aluno
+]]></system-out>
+</testcase>
+<testcase name="testCT001_CadastroAlunoValido()" classname="CasosDeTesteJUnit" time="0.011">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:CasosDeTesteJUnit]/[method:testCT001_CadastroAlunoValido()]
+display-name: CT001 - Cadastro de aluno com dados válidos
+]]></system-out>
+</testcase>
+<testcase name="testCT016_MatriculaComStatusInvalido()" classname="CasosDeTesteJUnit" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:CasosDeTesteJUnit]/[method:testCT016_MatriculaComStatusInvalido()]
+display-name: CT016 - Matrícula com status inválido
+]]></system-out>
+</testcase>
+<testcase name="testCT009_CadastroDisciplinaCargaHorariaMaximaValida()" classname="CasosDeTesteJUnit" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:CasosDeTesteJUnit]/[method:testCT009_CadastroDisciplinaCargaHorariaMaximaValida()]
+display-name: CT009 - Cadastro de disciplina com carga horária máxima válida
+]]></system-out>
+</testcase>
+<testcase name="testCT014_MatriculaComDataInvalida()" classname="CasosDeTesteJUnit" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:CasosDeTesteJUnit]/[method:testCT014_MatriculaComDataInvalida()]
+display-name: CT014 - Matrícula com data inválida
+]]></system-out>
+</testcase>
+<testcase name="testCT007_CadastroDisciplinaCargaHorariaMinimaValida()" classname="CasosDeTesteJUnit" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:CasosDeTesteJUnit]/[method:testCT007_CadastroDisciplinaCargaHorariaMinimaValida()]
+display-name: CT007 - Cadastro de disciplina com carga horária mínima válida
+]]></system-out>
+</testcase>
+<testcase name="testCT005_CadastroAlunoMatriculaDuplicada()" classname="CasosDeTesteJUnit" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:CasosDeTesteJUnit]/[method:testCT005_CadastroAlunoMatriculaDuplicada()]
+display-name: CT005 - Cadastro de aluno com matrícula duplicada
+]]></system-out>
+</testcase>
+<testcase name="testCT008_CadastroDisciplinaCargaHorariaZero()" classname="CasosDeTesteJUnit" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:CasosDeTesteJUnit]/[method:testCT008_CadastroDisciplinaCargaHorariaZero()]
+display-name: CT008 - Cadastro de disciplina com carga horária zero
+]]></system-out>
+</testcase>
+<testcase name="testCT012_MatriculaComDataAtual()" classname="CasosDeTesteJUnit" time="0.002">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:CasosDeTesteJUnit]/[method:testCT012_MatriculaComDataAtual()]
+display-name: CT012 - Matrícula com data atual
+]]></system-out>
+</testcase>
+<testcase name="testCT013_MatriculaComDataPassado()" classname="CasosDeTesteJUnit" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:CasosDeTesteJUnit]/[method:testCT013_MatriculaComDataPassado()]
+display-name: CT013 - Matrícula com data no passado
+]]></system-out>
+</testcase>
+<testcase name="testCT004_CadastroAlunoNomeAcimaLimite()" classname="CasosDeTesteJUnit" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:CasosDeTesteJUnit]/[method:testCT004_CadastroAlunoNomeAcimaLimite()]
+display-name: CT004 - Cadastro de aluno com nome acima do limite
+]]></system-out>
+</testcase>
+<testcase name="testCT006_CadastroAlunoEmailInvalido()" classname="CasosDeTesteJUnit" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:CasosDeTesteJUnit]/[method:testCT006_CadastroAlunoEmailInvalido()]
+display-name: CT006 - Cadastro de aluno com email inválido
+]]></system-out>
+</testcase>
+<testcase name="testCT011_CadastroDisciplinaSemProfessor()" classname="CasosDeTesteJUnit" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:CasosDeTesteJUnit]/[method:testCT011_CadastroDisciplinaSemProfessor()]
+display-name: CT011 - Cadastro de disciplina sem professor selecionado
+]]></system-out>
+</testcase>
+<testcase name="testCT015_MatriculaDuplicadaAtiva()" classname="CasosDeTesteJUnit" time="0.001">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:CasosDeTesteJUnit]/[method:testCT015_MatriculaDuplicadaAtiva()]
+display-name: CT015 - Matrícula duplicada ativa
+]]></system-out>
+</testcase>
+<testcase name="testCT002_CadastroAlunoNomeVazio()" classname="CasosDeTesteJUnit" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:CasosDeTesteJUnit]/[method:testCT002_CadastroAlunoNomeVazio()]
+display-name: CT002 - Cadastro de aluno com nome vazio
+]]></system-out>
+</testcase>
+<testcase name="testCT003_CadastroAlunoNomeLimiteMaximo()" classname="CasosDeTesteJUnit" time="0">
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]/[class:CasosDeTesteJUnit]/[method:testCT003_CadastroAlunoNomeLimiteMaximo()]
+display-name: CT003 - Cadastro de aluno com nome no limite máximo
+]]></system-out>
+</testcase>
+<system-out><![CDATA[
+unique-id: [engine:junit-jupiter]
+display-name: JUnit Jupiter
+]]></system-out>
+</testsuite>
