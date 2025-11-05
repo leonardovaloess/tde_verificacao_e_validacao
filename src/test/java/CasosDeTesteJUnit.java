@@ -563,4 +563,134 @@ public class CasosDeTesteJUnit {
       throw new IllegalArgumentException("Status inválido");
     }
   }
+
+  // ==================== MÉTODO MAIN PARA EXECUÇÃO DIRETA ====================
+
+  /**
+   * Método main para executar todos os testes sem precisar do JUnit runner
+   */
+  public static void main(String[] args) {
+    CasosDeTesteJUnit testSuite = new CasosDeTesteJUnit();
+    
+    System.out.println("=".repeat(80));
+    System.out.println("         EXECUÇÃO DOS CASOS DE TESTE - SISTEMA DE MATRÍCULA");
+    System.out.println("=".repeat(80));
+    
+    int totalTestes = 18;
+    int testesPassaram = 0;
+    int testesFalharam = 0;
+    
+    // Lista de todos os métodos de teste
+    String[] metodosTest = {
+      "testCT001_CadastroAlunoValido",
+      "testCT002_CadastroAlunoNomeVazio", 
+      "testCT003_CadastroAlunoNomeLimiteMaximo",
+      "testCT004_CadastroAlunoNomeAcimaLimite",
+      "testCT005_CadastroAlunoMatriculaDuplicada",
+      "testCT006_CadastroAlunoEmailInvalido",
+      "testCT007_CadastroDisciplinaCargaHorariaMinimaValida",
+      "testCT008_CadastroDisciplinaCargaHorariaZero",
+      "testCT009_CadastroDisciplinaCargaHorariaMaximaValida",
+      "testCT010_CadastroDisciplinaCargaHorariaAcimaLimite",
+      "testCT011_CadastroDisciplinaSemProfessor",
+      "testCT012_MatriculaComDataAtual",
+      "testCT013_MatriculaComDataPassado",
+      "testCT014_MatriculaComDataInvalida",
+      "testCT015_MatriculaDuplicadaAtiva",
+      "testCT016_MatriculaComStatusInvalido",
+      "testCT017_EdicaoAlunoExistente",
+      "testCT018_ExclusaoAluno"
+    };
+    
+    for (int i = 0; i < metodosTest.length; i++) {
+      String nomeMetodo = metodosTest[i];
+      System.out.printf("\n[%02d/%02d] Executando: %s\n", i+1, totalTestes, nomeMetodo);
+      
+      try {
+        testSuite.setUp();
+        
+        // Execução manual de cada teste
+        switch (nomeMetodo) {
+          case "testCT001_CadastroAlunoValido":
+            testSuite.testCT001_CadastroAlunoValido();
+            break;
+          case "testCT002_CadastroAlunoNomeVazio":
+            testSuite.testCT002_CadastroAlunoNomeVazio();
+            break;
+          case "testCT003_CadastroAlunoNomeLimiteMaximo":
+            testSuite.testCT003_CadastroAlunoNomeLimiteMaximo();
+            break;
+          case "testCT004_CadastroAlunoNomeAcimaLimite":
+            testSuite.testCT004_CadastroAlunoNomeAcimaLimite();
+            break;
+          case "testCT005_CadastroAlunoMatriculaDuplicada":
+            testSuite.testCT005_CadastroAlunoMatriculaDuplicada();
+            break;
+          case "testCT006_CadastroAlunoEmailInvalido":
+            testSuite.testCT006_CadastroAlunoEmailInvalido();
+            break;
+          case "testCT007_CadastroDisciplinaCargaHorariaMinimaValida":
+            testSuite.testCT007_CadastroDisciplinaCargaHorariaMinimaValida();
+            break;
+          case "testCT008_CadastroDisciplinaCargaHorariaZero":
+            testSuite.testCT008_CadastroDisciplinaCargaHorariaZero();
+            break;
+          case "testCT009_CadastroDisciplinaCargaHorariaMaximaValida":
+            testSuite.testCT009_CadastroDisciplinaCargaHorariaMaximaValida();
+            break;
+          case "testCT010_CadastroDisciplinaCargaHorariaAcimaLimite":
+            testSuite.testCT010_CadastroDisciplinaCargaHorariaAcimaLimite();
+            break;
+          case "testCT011_CadastroDisciplinaSemProfessor":
+            testSuite.testCT011_CadastroDisciplinaSemProfessor();
+            break;
+          case "testCT012_MatriculaComDataAtual":
+            testSuite.testCT012_MatriculaComDataAtual();
+            break;
+          case "testCT013_MatriculaComDataPassado":
+            testSuite.testCT013_MatriculaComDataPassado();
+            break;
+          case "testCT014_MatriculaComDataInvalida":
+            testSuite.testCT014_MatriculaComDataInvalida();
+            break;
+          case "testCT015_MatriculaDuplicadaAtiva":
+            testSuite.testCT015_MatriculaDuplicadaAtiva();
+            break;
+          case "testCT016_MatriculaComStatusInvalido":
+            testSuite.testCT016_MatriculaComStatusInvalido();
+            break;
+          case "testCT017_EdicaoAlunoExistente":
+            testSuite.testCT017_EdicaoAlunoExistente();
+            break;
+          case "testCT018_ExclusaoAluno":
+            testSuite.testCT018_ExclusaoAluno();
+            break;
+        }
+        
+        testSuite.tearDown();
+        System.out.println("✅ PASSOU");
+        testesPassaram++;
+        
+      } catch (Exception e) {
+        System.out.println("❌ FALHOU: " + e.getMessage());
+        testesFalharam++;
+      }
+    }
+    
+    // Relatório final
+    System.out.println("\n" + "=".repeat(80));
+    System.out.println("                           RELATÓRIO FINAL");
+    System.out.println("=".repeat(80));
+    System.out.printf("Total de Testes: %d\n", totalTestes);
+    System.out.printf("✅ Passaram: %d\n", testesPassaram);
+    System.out.printf("❌ Falharam: %d\n", testesFalharam);
+    System.out.printf("Taxa de Sucesso: %.1f%%\n", (testesPassaram * 100.0 / totalTestes));
+    System.out.println("=".repeat(80));
+    
+    if (testesFalharam == 0) {
+      System.out.println("🎉 TODOS OS TESTES PASSARAM! Sistema validado com sucesso.");
+    } else {
+      System.out.println("⚠️  Alguns testes falharam. Verifique a implementação das classes DAO.");
+    }
+  }
 }
