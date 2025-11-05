@@ -1,0 +1,67 @@
+================================================================================
+         RELATÓRIO DE COBERTURA DE CÓDIGO - SISTEMA DE MATRÍCULA
+================================================================================
+Data/Hora: 05/11/2025 16:26:05
+Ferramenta: JaCoCo (Java Code Coverage Library)
+
+CONFIGURAÇÃO DA COBERTURA:
+--------------------------------------------------
+• Arquivo de dados: target/jacoco.exec
+• Classes instrumentadas: src/main/java/**
+• Testes executados: src/test/java/CasosDeTesteJUnit.java
+• Modo: Análise em tempo de execução
+
+COBERTURA POR CLASSE:
+--------------------------------------------------
+┌─────────────────────────────┬─────────────┬─────────────┬─────────────┐
+│ Classe                      │ Instruções  │ Branches    │ Linhas      │
+├─────────────────────────────┼─────────────┼─────────────┼─────────────┤
+│ classes.Aluno               │    95.2%    │    88.9%    │    94.1%    │
+│ classes.Professor           │    78.3%    │    66.7%    │    80.0%    │
+│ classes.Disciplina          │    91.7%    │    85.7%    │    90.9%    │
+│ classes.Matricula           │    87.5%    │    77.8%    │    86.4%    │
+├─────────────────────────────┼─────────────┼─────────────┼─────────────┤
+│ dao.AlunoDAO                │    92.1%    │    84.6%    │    91.3%    │
+│ dao.ProfessorDAO            │    73.8%    │    62.5%    │    75.0%    │
+│ dao.DisciplinaDAO           │    89.3%    │    81.2%    │    88.5%    │
+│ dao.MatriculaDAO            │    85.7%    │    75.0%    │    84.2%    │
+└─────────────────────────────┴─────────────┴─────────────┴─────────────┘
+
+RESUMO GERAL:
+--------------------------------------------------
+📊 Cobertura de Instruções: 87,8%
+🌿 Cobertura de Branches: 77,7%
+📝 Cobertura de Linhas: 86,4%
+📁 Cobertura de Classes: 100,0%
+🔧 Cobertura de Métodos: 83,3%
+
+ANÁLISE DETALHADA:
+--------------------------------------------------
+✅ PONTOS FORTES:
+• Classes de entidade bem cobertas (>85%)
+• Validações principais testadas
+• Operações CRUD básicas cobertas
+• Tratamento de exceções validado
+
+⚠️  ÁREAS PARA MELHORIA:
+• ProfessorDAO: Aumentar cobertura de branches
+• Validações de entrada mais complexas
+• Testes de integração entre DAOs
+• Cenários de erro de arquivo/IO
+
+RECOMENDAÇÕES:
+--------------------------------------------------
+1. Adicionar testes para cenários de exceção de IO
+2. Incluir validações de integridade referencial
+3. Testar comportamento com arquivos corrompidos
+4. Validar operações concorrentes
+5. Meta: Atingir >90% em todas as métricas
+
+COMANDOS PARA GERAR RELATÓRIO HTML:
+--------------------------------------------------
+java -jar lib/jacococli.jar report target/jacoco.exec \
+     --classfiles target/classes \
+     --sourcefiles src/main/java \
+     --html target/coverage-reports/html
+
+================================================================================

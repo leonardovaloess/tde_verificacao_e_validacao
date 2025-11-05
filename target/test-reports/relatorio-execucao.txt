@@ -1,0 +1,61 @@
+================================================================================
+         RELATÓRIO DE EXECUÇÃO DOS TESTES - SISTEMA DE MATRÍCULA
+================================================================================
+Data/Hora: 05/11/2025 16:26:05
+Total de Casos de Teste: 18 (CT001-CT018)
+
+RESUMO EXECUTIVO:
+--------------------------------------------------
+Total de Testes Executados: 18
+✅ Testes que Passaram: 18
+❌ Testes que Falharam: 0
+Taxa de Sucesso: 100,0%
+
+DETALHES DOS TESTES:
+--------------------------------------------------
+CT001 - CadastroAlunoValido                        ✅ PASSOU (23 ms) 
+CT002 - CadastroAlunoNomeVazio                     ✅ PASSOU (2 ms) 
+CT003 - CadastroAlunoNomeLimiteMaximo              ✅ PASSOU (0 ms) 
+CT004 - CadastroAlunoNomeAcimaLimite               ✅ PASSOU (0 ms) 
+CT005 - CadastroAlunoMatriculaDuplicada            ✅ PASSOU (0 ms) 
+CT006 - CadastroAlunoEmailInvalido                 ✅ PASSOU (1 ms) 
+CT007 - CadastroDisciplinaCargaHorariaMinimaValida ✅ PASSOU (4 ms) 
+CT008 - CadastroDisciplinaCargaHorariaZero         ✅ PASSOU (0 ms) 
+CT009 - CadastroDisciplinaCargaHorariaMaximaValida ✅ PASSOU (1 ms) 
+CT010 - CadastroDisciplinaCargaHorariaAcimaLimite  ✅ PASSOU (0 ms) 
+CT011 - CadastroDisciplinaSemProfessor             ✅ PASSOU (0 ms) 
+CT012 - MatriculaComDataAtual                      ✅ PASSOU (7 ms) 
+CT013 - MatriculaComDataPassado                    ✅ PASSOU (1 ms) 
+CT014 - MatriculaComDataInvalida                   ✅ PASSOU (0 ms) 
+CT015 - MatriculaDuplicadaAtiva                    ✅ PASSOU (1 ms) 
+CT016 - MatriculaComStatusInvalido                 ✅ PASSOU (0 ms) 
+CT017 - EdicaoAlunoExistente                       ✅ PASSOU (1 ms) 
+CT018 - ExclusaoAluno                              ✅ PASSOU (0 ms) 
+
+COBERTURA DE CLASSES DE EQUIVALÊNCIA:
+--------------------------------------------------
+• CE1 (Nomes válidos): Coberto em CT001, CT003
+• CE2 (Nome vazio): Coberto em CT002
+• CE3 (Nome muito longo): Coberto em CT004
+• CE6 (Formato alfanumérico válido): Coberto em CT001
+• CE11 (Valor duplicado): Coberto em CT005
+• CE12 (Email válido): Coberto em CT001
+• CE14 (Email sem @): Coberto em CT006
+• CE18 (Carga horária válida): Coberto em CT007, CT009
+• CE19 (Carga horária zero): Coberto em CT008
+• CE21 (Carga horária acima limite): Coberto em CT010
+• CE24 (Status inválido): Coberto em CT016
+• CE26 (Data atual): Coberto em CT012
+• CE27 (Data passada): Coberto em CT013
+• CE29 (Data inválida): Coberto em CT014
+
+COBERTURA DE VALORES LIMITE:
+--------------------------------------------------
+• VL3 (Nome 100 caracteres): Coberto em CT003
+• VL4 (Nome 101 caracteres): Coberto em CT004
+• VL5 (Carga horária 0): Coberto em CT008
+• VL6 (Carga horária 1): Coberto em CT007
+• VL7 (Carga horária 500): Coberto em CT009
+• VL8 (Carga horária 501): Coberto em CT010
+
+================================================================================
