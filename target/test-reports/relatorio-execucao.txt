@@ -1,7 +1,7 @@
 ================================================================================
          RELATÓRIO DE EXECUÇÃO DOS TESTES - SISTEMA DE MATRÍCULA
 ================================================================================
-Data/Hora: 06/11/2025 18:28:24
+Data/Hora: 06/11/2025 18:30:59
 Total de Casos de Teste: 18 (CT001-CT018)
 
 RESUMO EXECUTIVO:
@@ -13,24 +13,24 @@ Taxa de Sucesso: 94,4%
 
 DETALHES DOS TESTES:
 --------------------------------------------------
-CT001 - CadastroAlunoValido                        ❌ FALHOU (12 ms) - Asserção falhou: Nome deve ser 'João Silva' ==> expected: <João Silva> but was: <>
-CT002 - CadastroAlunoNomeVazio                     ✅ PASSOU (2 ms)
-CT003 - CadastroAlunoNomeLimiteMaximo              ✅ PASSOU (0 ms)
+CT001 - CadastroAlunoValido                        ❌ FALHOU (11 ms) - Asserção falhou: Matrícula deve ser '2023001' ==> expected: <2023001> but was: <>
+CT002 - CadastroAlunoNomeVazio                     ✅ PASSOU (1 ms)
+CT003 - CadastroAlunoNomeLimiteMaximo              ✅ PASSOU (1 ms)
 CT004 - CadastroAlunoNomeAcimaLimite               ✅ PASSOU (0 ms)
 CT005 - CadastroAlunoMatriculaDuplicada            ✅ PASSOU (1 ms)
 CT006 - CadastroAlunoEmailInvalido                 ✅ PASSOU (0 ms)
-CT007 - CadastroDisciplinaCargaHorariaMinimaValida ✅ PASSOU (5 ms)
-CT008 - CadastroDisciplinaCargaHorariaZero         ✅ PASSOU (1 ms)
+CT007 - CadastroDisciplinaCargaHorariaMinimaValida ✅ PASSOU (4 ms)
+CT008 - CadastroDisciplinaCargaHorariaZero         ✅ PASSOU (0 ms)
 CT009 - CadastroDisciplinaCargaHorariaMaximaValida ✅ PASSOU (0 ms)
-CT010 - CadastroDisciplinaCargaHorariaAcimaLimite  ✅ PASSOU (0 ms)
+CT010 - CadastroDisciplinaCargaHorariaAcimaLimite  ✅ PASSOU (1 ms)
 CT011 - CadastroDisciplinaSemProfessor             ✅ PASSOU (0 ms)
-CT012 - MatriculaComDataAtual                      ✅ PASSOU (6 ms)
+CT012 - MatriculaComDataAtual                      ✅ PASSOU (5 ms)
 CT013 - MatriculaComDataPassado                    ✅ PASSOU (1 ms)
 CT014 - MatriculaComDataInvalida                   ✅ PASSOU (0 ms)
 CT015 - MatriculaDuplicadaAtiva                    ✅ PASSOU (1 ms)
-CT016 - MatriculaComStatusInvalido                 ✅ PASSOU (0 ms)
-CT017 - EdicaoAlunoExistente                       ✅ PASSOU (1 ms)
-CT018 - ExclusaoAluno                              ✅ PASSOU (1 ms)
+CT016 - MatriculaComStatusInvalido                 ✅ PASSOU (1 ms)
+CT017 - EdicaoAlunoExistente                       ✅ PASSOU (0 ms)
+CT018 - ExclusaoAluno                              ✅ PASSOU (0 ms)
 
 COBERTURA DE CLASSES DE EQUIVALÊNCIA:
 --------------------------------------------------

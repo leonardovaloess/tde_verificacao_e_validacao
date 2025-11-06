@@ -165,7 +165,7 @@ public class CasosDeTesteJUnit {
   @DisplayName("CT001 - Cadastro de aluno com dados válidos")
   public void testCT001_CadastroAlunoValido() {
     // ARRANGE: Preparar dados de teste com valores válidos
-    Aluno aluno = new Aluno("", "2023001", "joao@email.com", "(11) 99999-9999");
+    Aluno aluno = new Aluno("João Silva", "2023001", "joao@email.com", "(11) 99999-9999");
 
     // ACT: Executar a operação sendo testada
     alunoDAO.salvar(aluno);
