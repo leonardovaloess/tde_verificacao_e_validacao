@@ -728,14 +728,7 @@ public class CasosDeTesteJUnit {
         writer.println("5. Meta: Atingir >90% em todas as métricas");
         
         writer.println();
-        writer.println("COMANDOS PARA GERAR RELATÓRIO HTML:");
-        writer.println("-".repeat(50));
-        writer.println("java -jar lib/jacococli.jar report target/jacoco.exec \\");
-        writer.println("     --classfiles target/classes \\");
-        writer.println("     --sourcefiles src/main/java \\");
-        writer.println("     --html target/coverage-reports/html");
-        writer.println();
-        writer.println("=".repeat(80));
+
       }
       
       System.out.println("📊 Relatório de cobertura salvo em: target/test-reports/relatorio-cobertura.txt");
@@ -953,11 +946,7 @@ public class CasosDeTesteJUnit {
     System.out.println("   • target/test-reports/relatorio-execucao.txt");
     System.out.println("   • target/test-reports/relatorio-cobertura.txt");
     System.out.println("   • target/jacoco.exec (dados de cobertura)");
-    System.out.println("\n🔗 Para gerar relatório HTML de cobertura:");
-    System.out.println("   java -jar lib/jacococli.jar report target/jacoco.exec \\");
-    System.out.println("        --classfiles target/classes \\");
-    System.out.println("        --sourcefiles src/main/java \\");
-    System.out.println("        --html target/coverage-reports/html");
+
     System.out.println();
   }
 }
