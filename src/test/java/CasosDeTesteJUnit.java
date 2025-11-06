@@ -6,10 +6,9 @@
  * 
  * DESCRIÇÃO:
  * Este arquivo implementa um framework completo de testes automatizados para o
- * Sistema de Matrícula Acadêmica, incluindo:
+ * Sistema de Matrícula Acadêmica, focado exclusivamente nos testes funcionais:
  * - 18 casos de teste funcionais (CT001-CT018)
- * - Integração com JaCoCo para análise de cobertura de código
- * - Geração automática de relatórios em formato TXT
+ * - Geração de relatórios de execução em formato TXT
  * - Validação de Classes de Equivalência e Valores Limite
  * 
  * FUNCIONALIDADES PRINCIPAIS:
@@ -19,15 +18,10 @@
  *    - Gestão de Matrículas (CT012-CT016)
  *    - Operações de CRUD (CT017-CT018)
  * 
- * 2. ANÁLISE DE COBERTURA:
- *    - Instrumentação em tempo real com JaCoCo
- *    - Análise de instruções, branches e linhas
- *    - Relatórios detalhados por classe
- * 
- * 3. RELATÓRIOS AUTOMATIZADOS:
+ * 2. RELATÓRIOS AUTOMATIZADOS:
  *    - Relatório de execução: status, tempo, detalhes dos testes
- *    - Relatório de cobertura: métricas reais baseadas no jacoco.exec
  *    - Mapeamento de Classes de Equivalência e Valores Limite
+ *    - Estatísticas completas de execução
  * 
  * ARQUITETURA DOS TESTES:
  * - Setup/Teardown: Inicialização e limpeza antes/depois de cada teste
@@ -35,11 +29,9 @@
  * - Validações robustas: Verificação de dados e comportamentos esperados
  * - Tratamento de exceções: Validação de cenários de erro
  * 
- * INTEGRAÇÃO JACOCO:
- * - Agent: Instrumenta classes em tempo de execução
- * - Coleta: Dados salvos em target/jacoco.exec (formato binário)
- * - Análise: Processamento do arquivo para extração de métricas
- * - Relatório: Conversão para formato texto legível
+ * ANÁLISE DE COBERTURA:
+ * Para análise de cobertura de código, utilize a classe GerarCobertura.java
+ * que implementa integração completa com JaCoCo de forma independente.
  * 
  * CLASSES DE EQUIVALÊNCIA COBERTAS:
  * CE1-CE3: Validação de nomes (válido, vazio, muito longo)
@@ -54,9 +46,9 @@
  * VL3-VL4: Nomes com 100/101 caracteres
  * VL5-VL8: Carga horária 0/1/500/501 horas
  * 
- * AUTOR: Sistema de Verificação e Validação
+ * AUTOR: Sistema de Verificação e Validação - Leonardo Berlanda de Valões
  * DATA: Novembro 2025
- * VERSÃO: 2.0 (com integração JaCoCo real)
+ * VERSÃO: 2.0 (Testes funcionais isolados - JaCoCo separado em GerarCobertura.java)
  * ================================================================================
  */
 
@@ -69,15 +61,12 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.lang.reflect.Method;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Map;
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -763,291 +752,30 @@ public class CasosDeTesteJUnit {
    * ==================== GERAÇÃO DE RELATÓRIOS ====================
    * 
    * Esta seção implementa a geração automática de relatórios detalhados
-   * sobre a execução dos testes e análise de cobertura de código.
-   */
-
-  /**
-   * CLASSE AUXILIAR - DADOS DE COBERTURA POR CLASSE
+   * sobre a execução dos testes funcionais.
    * 
-   * Encapsula as métricas de cobertura para uma classe específica.
-   * Utilizada para organizar e processar dados extraídos do JaCoCo.
-   * 
-   * MÉTRICAS INCLUÍDAS:
-   * - instrucoes: Percentual de instruções executadas
-   * - branches: Percentual de ramificações (if/else) testadas  
-   * - linhas: Percentual de linhas de código executadas
-   * - nome: Nome completo da classe (ex: classes.Aluno)
-   */
-  static class CoberturaClasse {
-    String nome;           // Nome da classe (ex: "classes.Aluno")
-    double instrucoes;     // Cobertura de instruções (0-100%)
-    double branches;       // Cobertura de branches (0-100%)
-    double linhas;         // Cobertura de linhas (0-100%)
-    
-    /**
-     * Construtor para inicializar métricas de cobertura
-     */
-    CoberturaClasse(String nome, double instrucoes, double branches, double linhas) {
-      this.nome = nome;
-      this.instrucoes = instrucoes;
-      this.branches = branches;
-      this.linhas = linhas;
-    }
-  }
-
-  /**
-   * GERADOR DE RELATÓRIO DE COBERTURA - ANÁLISE REAL DO JACOCO
-   * 
-   * FUNCIONALIDADE:
-   * Este método implementa a análise real dos dados de cobertura coletados
-   * pelo agente JaCoCo durante a execução dos testes. Diferente de dados
-   * simulados, utiliza informações extraídas do arquivo jacoco.exec.
-   * 
-   * PROCESSO DE ANÁLISE:
-   * 1. Verificação da existência do arquivo jacoco.exec
-   * 2. Análise do tamanho do arquivo (indica quantidade de dados coletados)
-   * 3. Cálculo de métricas baseadas nos dados reais
-   * 4. Geração de relatório formatado em texto
-   * 
-   * MÉTRICAS CALCULADAS:
-   * - Cobertura de Instruções: Comandos executados vs. total
-   * - Cobertura de Branches: Ramificações testadas vs. total  
-   * - Cobertura de Linhas: Linhas executadas vs. total
-   * - Resumo por classe: Detalhamento individual de cada classe
-   * 
-   * SAÍDA:
-   * - Arquivo: target/test-reports/relatorio-cobertura.txt
-   * - Formato: Tabela organizada com métricas detalhadas
-   * - Análise: Pontos fortes e áreas para melhoria
-   * 
-   * INTEGRAÇÃO JACOCO:
-   * - Lê dados binários do arquivo jacoco.exec
-   * - Processa informações de instrumentação
-   * - Converte para formato legível
-   * - Calcula estatísticas agregadas
+   * NOTA: Para análise de cobertura de código, utilize GerarCobertura.java
    */
    
-  private static void gerarRelatorioCobertura() {
-    try {
-      // Criar diretório de relatórios se não existir
-      File relatoriosDir = new File("target/test-reports");
-      if (!relatoriosDir.exists()) {
-        relatoriosDir.mkdirs();
-      }
-
-      // Analisar dados reais do JaCoCo
-      Map<String, CoberturaClasse> dadosCobertura = analisarJaCoCoExec();
-
-      // Gerar relatório de cobertura
-      try (PrintWriter writer = new PrintWriter(new FileWriter("target/test-reports/relatorio-cobertura.txt"))) {
-        writer.println("=".repeat(80));
-        writer.println("         RELATÓRIO DE COBERTURA DE CÓDIGO - SISTEMA DE MATRÍCULA");
-        writer.println("=".repeat(80));
-        writer.println("Data/Hora: " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")));
-        writer.println("Ferramenta: JaCoCo (Java Code Coverage Library) - DADOS REAIS");
-        writer.println();
-        
-        writer.println("CONFIGURAÇÃO DA COBERTURA:");
-        writer.println("-".repeat(50));
-        writer.println("• Arquivo de dados: target/jacoco.exec");
-        writer.println("• Classes instrumentadas: src/main/java/**");
-        writer.println("• Testes executados: src/test/java/CasosDeTesteJUnit.java");
-        writer.println("• Modo: Análise em tempo de execução");
-        writer.println();
-        
-        // Gerar dados reais de cobertura
-        writer.println("COBERTURA POR CLASSE:");
-        writer.println("-".repeat(50));
-        writer.println("┌─────────────────────────────┬─────────────┬─────────────┬─────────────┐");
-        writer.println("│ Classe                      │ Instruções  │ Branches    │ Linhas      │");
-        writer.println("├─────────────────────────────┼─────────────┼─────────────┼─────────────┤");
-        
-        // Escrever dados reais para cada classe
-        String[] classes = {"classes.Aluno", "classes.Professor", "classes.Disciplina", "classes.Matricula",
-                           "dao.AlunoDAO", "dao.ProfessorDAO", "dao.DisciplinaDAO", "dao.MatriculaDAO"};
-        
-        for (String classe : classes) {
-          CoberturaClasse dados = dadosCobertura.getOrDefault(classe, 
-            new CoberturaClasse(classe, 0.0, 0.0, 0.0));
-          writer.printf("│ %-27s │   %5.1f%%    │   %5.1f%%    │   %5.1f%%    │%n", 
-            dados.nome, dados.instrucoes, dados.branches, dados.linhas);
-          if (classe.equals("classes.Matricula")) {
-            writer.println("├─────────────────────────────┼─────────────┼─────────────┼─────────────┤");
-          }
-        }
-        
-        writer.println("└─────────────────────────────┴─────────────┴─────────────┴─────────────┘");
-        writer.println();
-        
-        // Calcular resumo geral com dados reais
-        double mediaInstrucoes = dadosCobertura.values().stream()
-          .mapToDouble(c -> c.instrucoes).average().orElse(0.0);
-        double mediaBranches = dadosCobertura.values().stream()
-          .mapToDouble(c -> c.branches).average().orElse(0.0);
-        double mediaLinhas = dadosCobertura.values().stream()
-          .mapToDouble(c -> c.linhas).average().orElse(0.0);
-        
-        writer.println("RESUMO GERAL:");
-        writer.println("-".repeat(50));
-        writer.printf("📊 Cobertura de Instruções: %.1f%%\n", mediaInstrucoes);
-        writer.printf("🌿 Cobertura de Branches: %.1f%%\n", mediaBranches);
-        writer.printf("📝 Cobertura de Linhas: %.1f%%\n", mediaLinhas);
-        writer.printf("📁 Cobertura de Classes: %.1f%%\n", 100.0);
-        writer.printf("🔧 Cobertura de Métodos: %.1f%%\n", (mediaInstrucoes + mediaLinhas) / 2);
-        writer.println();
-        
-        writer.println("ANÁLISE DETALHADA:");
-        writer.println("-".repeat(50));
-        writer.println("✅ PONTOS FORTES:");
-        writer.println("• Classes de entidade bem cobertas (>85%)");
-        writer.println("• Validações principais testadas");
-        writer.println("• Operações CRUD básicas cobertas");
-        writer.println("• Tratamento de exceções validado");
-        writer.println();
-        
-        writer.println("⚠️  ÁREAS PARA MELHORIA:");
-        writer.println("• ProfessorDAO: Aumentar cobertura de branches");
-        writer.println("• Validações de entrada mais complexas");
-        writer.println("• Testes de integração entre DAOs");
-        writer.println("• Cenários de erro de arquivo/IO");
-        writer.println();
-        
-        writer.println("RECOMENDAÇÕES:");
-        writer.println("-".repeat(50));
-        writer.println("1. Adicionar testes para cenários de exceção de IO");
-        writer.println("2. Incluir validações de integridade referencial");
-        writer.println("3. Testar comportamento com arquivos corrompidos");
-        writer.println("4. Validar operações concorrentes");
-        writer.println("5. Meta: Atingir >90% em todas as métricas");
-        
-        writer.println();
-
-      }
-      
-      System.out.println("📊 Relatório de cobertura salvo em: target/test-reports/relatorio-cobertura.txt");
-      
-    } catch (IOException e) {
-      System.err.println("Erro ao gerar relatório de cobertura: " + e.getMessage());
-    }
-  }
-
   /**
-   * Analisa o arquivo jacoco.exec e extrai dados reais de cobertura
-   * Como o JaCoCo usa formato binário complexo, simula análise baseada em:
-   * - Tamanho do arquivo jacoco.exec
-   * - Número de testes executados
-   * - Complexidade das classes
+   * GERADOR DE RELATÓRIO DE EXECUÇÃO DOS TESTES
+   * 
+   * FUNCIONALIDADE:
+   * Este método gera um relatório completo da execução dos testes,
+   * incluindo estatísticas, detalhes e mapeamento de cobertura de
+   * Classes de Equivalência e Valores Limite.
+   * 
+   * CONTEÚDO DO RELATÓRIO:
+   * - Resumo executivo com taxas de sucesso/falha
+   * - Detalhes individuais de cada teste executado
+   * - Mapeamento das Classes de Equivalência testadas
+   * - Cobertura dos Valores Limite validados
+   * - Tempo de execução e data/hora da execução
+   * 
+   * SAÍDA:
+   * - Arquivo: target/test-reports/relatorio-execucao.txt
+   * - Formato: Texto estruturado e organizado
    */
-  private static Map<String, CoberturaClasse> analisarJaCoCoExec() {
-    Map<String, CoberturaClasse> dados = new HashMap<>();
-    
-    try {
-      File jacocoFile = new File("target/jacoco.exec");
-      if (!jacocoFile.exists()) {
-        System.out.println("⚠️  Arquivo jacoco.exec não encontrado, usando estimativas");
-        return gerarEstimativasCobertura();
-      }
-      
-      long tamanhoArquivo = jacocoFile.length();
-      System.out.printf("📊 Analisando arquivo JaCoCo: %d bytes%n", tamanhoArquivo);
-      
-      // Análise baseada no tamanho do arquivo e testes executados
-      // Quanto maior o arquivo, mais cobertura foi coletada
-      double fatorCobertura = Math.min(95.0, 60.0 + (tamanhoArquivo / 1000.0));
-      
-      // Classes de entidade (normalmente têm boa cobertura - getters/setters)
-      dados.put("classes.Aluno", new CoberturaClasse("classes.Aluno", 
-        fatorCobertura + 2, fatorCobertura - 5, fatorCobertura + 1));
-      dados.put("classes.Professor", new CoberturaClasse("classes.Professor", 
-        fatorCobertura - 8, fatorCobertura - 12, fatorCobertura - 7));
-      dados.put("classes.Disciplina", new CoberturaClasse("classes.Disciplina", 
-        fatorCobertura - 1, fatorCobertura - 3, fatorCobertura));
-      dados.put("classes.Matricula", new CoberturaClasse("classes.Matricula", 
-        fatorCobertura - 3, fatorCobertura - 8, fatorCobertura - 2));
-      
-      // Classes DAO (cobertura varia conforme complexidade dos testes)
-      dados.put("dao.AlunoDAO", new CoberturaClasse("dao.AlunoDAO", 
-        fatorCobertura + 1, fatorCobertura - 2, fatorCobertura));
-      dados.put("dao.ProfessorDAO", new CoberturaClasse("dao.ProfessorDAO", 
-        fatorCobertura - 12, fatorCobertura - 15, fatorCobertura - 10));
-      dados.put("dao.DisciplinaDAO", new CoberturaClasse("dao.DisciplinaDAO", 
-        fatorCobertura - 2, fatorCobertura - 5, fatorCobertura - 1));
-      dados.put("dao.MatriculaDAO", new CoberturaClasse("dao.MatriculaDAO", 
-        fatorCobertura - 5, fatorCobertura - 10, fatorCobertura - 4));
-      
-      System.out.println("✅ Análise do JaCoCo concluída com dados baseados no arquivo real");
-      
-    } catch (Exception e) {
-      System.err.println("⚠️  Erro ao analisar jacoco.exec: " + e.getMessage());
-      return gerarEstimativasCobertura();
-    }
-    
-    return dados;
-  }
-
-  /**
-   * Gera estimativas de cobertura baseadas na análise manual dos testes
-   */
-  private static Map<String, CoberturaClasse> gerarEstimativasCobertura() {
-    Map<String, CoberturaClasse> dados = new HashMap<>();
-    
-    // Estimativas baseadas nos 18 casos de teste implementados
-    dados.put("classes.Aluno", new CoberturaClasse("classes.Aluno", 94.2, 87.5, 93.1));
-    dados.put("classes.Professor", new CoberturaClasse("classes.Professor", 76.8, 64.2, 78.3));
-    dados.put("classes.Disciplina", new CoberturaClasse("classes.Disciplina", 90.5, 84.1, 89.7));
-    dados.put("classes.Matricula", new CoberturaClasse("classes.Matricula", 86.3, 76.9, 85.2));
-    
-    dados.put("dao.AlunoDAO", new CoberturaClasse("dao.AlunoDAO", 91.4, 83.7, 90.6));
-    dados.put("dao.ProfessorDAO", new CoberturaClasse("dao.ProfessorDAO", 72.1, 60.8, 73.5));
-    dados.put("dao.DisciplinaDAO", new CoberturaClasse("dao.DisciplinaDAO", 88.7, 80.3, 87.9));
-    dados.put("dao.MatriculaDAO", new CoberturaClasse("dao.MatriculaDAO", 84.9, 74.2, 83.8));
-    
-    return dados;
-  }
-
-  /**
-   * Inicia o agente JaCoCo para coleta de dados de cobertura
-   */
-  private static void iniciarJaCoCo() {
-    try {
-      // Verificar se o agente JaCoCo está disponível
-      File jacocoAgent = new File("lib/jacocoagent.jar");
-      if (jacocoAgent.exists()) {
-        System.out.println("🎯 JaCoCo Agent detectado: " + jacocoAgent.getAbsolutePath());
-        System.out.println("📈 Coleta de dados de cobertura ativada");
-        
-        // Garantir que o diretório target existe
-        File targetDir = new File("target");
-        if (!targetDir.exists()) {
-          targetDir.mkdirs();
-        }
-        
-        System.out.println("💾 Dados de cobertura serão salvos em: target/jacoco.exec");
-      } else {
-        System.out.println("⚠️  JaCoCo Agent não encontrado em lib/jacocoagent.jar");
-        System.out.println("   Executando testes sem coleta de cobertura");
-      }
-    } catch (Exception e) {
-      System.out.println("❌ Erro ao configurar JaCoCo: " + e.getMessage());
-    }
-  }
-
-  /**
-   * Finaliza a coleta de dados do JaCoCo e gera relatórios TXT
-   */
-  private static void finalizarJaCoCo() {
-    try {
-      File jacocoExec = new File("target/jacoco.exec");
-      if (jacocoExec.exists()) {
-        System.out.println("✅ Dados de cobertura coletados: " + jacocoExec.length() + " bytes");
-        System.out.println("� Arquivo de cobertura: target/jacoco.exec");
-      } else {
-        System.out.println("⚠️  Arquivo jacoco.exec não encontrado");
-      }
-    } catch (Exception e) {
-      System.out.println("❌ Erro ao finalizar JaCoCo: " + e.getMessage());
-    }
-  }
 
   // ==================== MÉTODO MAIN PARA EXECUÇÃO DIRETA ====================
 
@@ -1073,13 +801,13 @@ public class CasosDeTesteJUnit {
    * 
    * 3. COLETA DE DADOS:
    *    - Registra detalhes de cada teste executado
-   *    - Coleta métricas de cobertura via JaCoCo
-   *    - Organiza dados para relatórios
+   *    - Organiza dados para relatórios de execução
+   *    - Calcula estatísticas de sucesso/falha
    * 
    * 4. GERAÇÃO DE RELATÓRIOS:
    *    - Relatório de execução: status, tempos, detalhes
-   *    - Relatório de cobertura: análise real do jacoco.exec
    *    - Estatísticas finais e resumo executivo
+   *    - Mapeamento de Classes de Equivalência e Valores Limite
    * 
    * LISTA DE CASOS DE TESTE EXECUTADOS:
    * CT001-CT006: Módulo de Cadastro de Alunos
@@ -1090,22 +818,15 @@ public class CasosDeTesteJUnit {
    * SAÍDAS GERADAS:
    * - Console: Progresso em tempo real e resumo final
    * - target/test-reports/relatorio-execucao.txt: Detalhes da execução
-   * - target/test-reports/relatorio-cobertura.txt: Análise de cobertura
-   * - target/jacoco.exec: Dados binários de cobertura
    * 
-   * INTEGRAÇÃO JACOCO:
-   * - Instrumentação automática de classes
-   * - Coleta de dados em tempo real
-   * - Análise post-execução dos dados coletados
-   * - Conversão para métricas legíveis
+   * ANÁLISE DE COBERTURA:
+   * Para relatórios de cobertura de código, utilize a classe GerarCobertura.java
+   * que pode ser executada independentemente após os testes.
    * 
    * @param args Argumentos da linha de comando (não utilizados)
    */
   public static void main(String[] args) {
     // ========== FASE 1: INICIALIZAÇÃO ==========
-    // Configurar JaCoCo para coleta de cobertura em tempo real
-    iniciarJaCoCo();
-    
     // Instanciar suite de testes
     CasosDeTesteJUnit testSuite = new CasosDeTesteJUnit();
     
@@ -1113,8 +834,9 @@ public class CasosDeTesteJUnit {
     System.out.println("=".repeat(80));
     System.out.println("         EXECUÇÃO DOS CASOS DE TESTE - SISTEMA DE MATRÍCULA");
     System.out.println("=".repeat(80));
-    System.out.println("🧪 Framework: JUnit 5 com JaCoCo para cobertura de código");
+    System.out.println("🧪 Framework: JUnit 5 para testes funcionais");
     System.out.println("📅 Data: " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")));
+    System.out.println("💡 Para análise de cobertura, execute GerarCobertura.java após os testes");
     System.out.println();
     
     // ========== FASE 2: PREPARAÇÃO DOS DADOS ==========
@@ -1239,7 +961,7 @@ public class CasosDeTesteJUnit {
     }
     
     // Finalizar coleta de dados JaCoCo
-    finalizarJaCoCo();
+
     
     // Relatório final no console
     System.out.println("\n" + "=".repeat(80));
@@ -1252,77 +974,28 @@ public class CasosDeTesteJUnit {
     System.out.println("=".repeat(80));
     
     // ========== FASE 5: RELATÓRIOS E FINALIZAÇÃO ==========
-    // Gerar relatórios detalhados em arquivos TXT
+    // Gerar relatório de execução
     gerarRelatorioExecucao(totalTestes, testesPassaram, testesFalharam, testesDetalhes);
-    gerarRelatorioCobertura();
     
     // Apresentar resumo final baseado nos resultados
     if (testesFalharam == 0) {
-      System.out.println("Todos os testes Passaram!");
-      System.out.println("Dados de cobertura coletados com JaCoCo.");
+      System.out.println("🎉 TODOS OS TESTES PASSARAM! Sistema validado com sucesso.");
     } else {
-      System.out.println("Alguns testes falharam.");
+      System.out.println("⚠️  Alguns testes falharam. Verifique a implementação das classes DAO.");
       System.out.printf("   %d de %d testes precisam de correção.\n", testesFalharam, totalTestes);
     }
     
     // Informar sobre relatórios gerados
-    System.out.println("\n Relatórios gerados:");
+    System.out.println("\n📋 Relatórios gerados:");
     System.out.println("   • target/test-reports/relatorio-execucao.txt");
-    System.out.println("   • target/test-reports/relatorio-cobertura.txt");
-    System.out.println("   • target/jacoco.exec (dados de cobertura)");
     
-    // Finalizar agente JaCoCo
-    finalizarJaCoCo();
-    
-    System.out.println("\n Para gerar relatório HTML de cobertura:");
-    System.out.println("   java -jar lib/jacococli.jar report target/jacoco.exec \\");
-    System.out.println("        --classfiles target/classes \\");
-    System.out.println("        --sourcefiles src/main/java \\");
-    System.out.println("        --html target/coverage-reports/html");
+    // Informar sobre análise de cobertura
+    System.out.println("\n📊 Para análise de cobertura de código:");
+    System.out.println("   1. Execute: java GerarCobertura");
+    System.out.println("   2. Ou compile e execute GerarCobertura.java");
+    System.out.println("   3. Relatório será gerado em: target/test-reports/relatorio-cobertura.txt");
 
-    System.out.println("\n Execução concluída!");
+    System.out.println("\n📊 Execução concluída!");
   }
-  
-  // ==================== FIM DA CLASSE CasosDeTesteJUnit ====================
-  
-
-
-/**
- * ================================================================================
- * RESUMO DA DOCUMENTAÇÃO DO SISTEMA DE TESTES
- * ================================================================================
- * 
- * Este arquivo implementa um framework completo de testes automatizados que:
- * 
- * ✅ EXECUTA 18 casos de teste funcionais cobrindo:
- *    - Cadastro e validação de Alunos (6 testes)
- *    - Cadastro e validação de Disciplinas (5 testes)  
- *    - Gestão de Matrículas (5 testes)
- *    - Operações CRUD (2 testes)
- * 
- * ✅ INTEGRA com JaCoCo para análise real de cobertura:
- *    - Instrumentação automática em tempo de execução
- *    - Coleta de dados binários no arquivo jacoco.exec
- *    - Análise e conversão para métricas legíveis
- *    - Cálculo de cobertura de instruções, branches e linhas
- * 
- * ✅ GERA relatórios automatizados:
- *    - Relatório de execução com tempos e detalhes
- *    - Relatório de cobertura com análise por classe
- *    - Mapeamento de Classes de Equivalência e Valores Limite
- *    - Recomendações para melhoria da qualidade
- * 
- * ✅ UTILIZA boas práticas de teste:
- *    - Padrão Arrange-Act-Assert
- *    - Isolamento entre testes
- *    - Validação de exceções
- *    - Nomenclatura clara e consistente
- * 
- * AUTOR: Sistema de Verificação e Validação - Leonardo Berlanda de Valões
- * DISCIPLINA: Verificação e Validação de Software
- * VERSÃO: 2.0 (com análise real de cobertura JaCoCo)
- * DATA: Novembro 2025
- * ================================================================================
- */
-  }
-
+ 
+}
