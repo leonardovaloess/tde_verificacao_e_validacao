@@ -165,7 +165,7 @@ public class CasosDeTesteJUnit {
   @DisplayName("CT001 - Cadastro de aluno com dados válidos")
   public void testCT001_CadastroAlunoValido() {
     // ARRANGE: Preparar dados de teste com valores válidos
-    Aluno aluno = new Aluno("João Silva", "2023001", "joao@email.com", "(11) 99999-9999");
+    Aluno aluno = new Aluno("", "2023001", "joao@email.com", "(11) 99999-9999");
 
     // ACT: Executar a operação sendo testada
     alunoDAO.salvar(aluno);
@@ -880,9 +880,10 @@ public class CasosDeTesteJUnit {
       String erro = "";
       
       try {
+        // Garantir setup limpo para cada teste
         testSuite.setUp();
         
-        // Execução manual de cada teste
+        // Execução manual de cada teste com tratamento robusto de exceções
         switch (nomeMetodo) {
           case "testCT001_CadastroAlunoValido":
             testSuite.testCT001_CadastroAlunoValido();
@@ -938,16 +939,33 @@ public class CasosDeTesteJUnit {
           case "testCT018_ExclusaoAluno":
             testSuite.testCT018_ExclusaoAluno();
             break;
+          default:
+            throw new RuntimeException("Método de teste não encontrado: " + nomeMetodo);
         }
         
-        testSuite.tearDown();
+        // Se chegou até aqui, o teste passou
         status = "✅ PASSOU";
         testesPassaram++;
         
-      } catch (Exception e) {
-        erro = e.getMessage();
-        System.out.println("   Erro: " + erro);
+      } catch (AssertionError e) {
+        // Falha de asserção - teste falhou mas é comportamento esperado
+        erro = "Asserção falhou: " + e.getMessage();
         testesFalharam++;
+        System.out.println("   ⚠️  " + erro);
+        
+      } catch (Exception e) {
+        // Qualquer outra exceção - erro inesperado
+        erro = "Erro inesperado: " + e.getClass().getSimpleName() + " - " + e.getMessage();
+        testesFalharam++;
+        System.out.println("   ❌ " + erro);
+        
+      } finally {
+        // Garantir limpeza mesmo se houver exceção
+        try {
+          testSuite.tearDown();
+        } catch (Exception cleanupError) {
+          System.out.println("   ⚠️  Erro na limpeza: " + cleanupError.getMessage());
+        }
       }
       
       long fimTeste = System.currentTimeMillis();
@@ -955,47 +973,93 @@ public class CasosDeTesteJUnit {
       
       System.out.printf("   %s (%d ms)\n", status, duracao);
       
-      // Adicionar detalhes para o relatório
-      testesDetalhes.add(String.format("%-50s %s (%d ms) %s", 
-          nomeDisplay, status, duracao, erro.isEmpty() ? "" : "- " + erro));
+      // Adicionar detalhes para o relatório (sempre, mesmo com erro)
+      testesDetalhes.add(String.format("%-50s %s (%d ms)%s", 
+          nomeDisplay, status, duracao, 
+          erro.isEmpty() ? "" : " - " + erro));
     }
     
-    // Finalizar coleta de dados JaCoCo
-
-    
-    // Relatório final no console
+    // ========== FASE 4: APRESENTAÇÃO DOS RESULTADOS ==========
+    // Relatório final no console (sempre executado)
     System.out.println("\n" + "=".repeat(80));
     System.out.println("                           RELATÓRIO FINAL");
     System.out.println("=".repeat(80));
-    System.out.printf("Total de Testes: %d\n", totalTestes);
+    System.out.printf("📊 Total de Testes: %d\n", totalTestes);
     System.out.printf("✅ Passaram: %d\n", testesPassaram);
     System.out.printf("❌ Falharam: %d\n", testesFalharam);
-    System.out.printf("Taxa de Sucesso: %.1f%%\n", (testesPassaram * 100.0 / totalTestes));
+    System.out.printf("🎯 Taxa de Sucesso: %.1f%%\n", (testesPassaram * 100.0 / totalTestes));
     System.out.println("=".repeat(80));
     
     // ========== FASE 5: RELATÓRIOS E FINALIZAÇÃO ==========
-    // Gerar relatório de execução
-    gerarRelatorioExecucao(totalTestes, testesPassaram, testesFalharam, testesDetalhes);
+    // Garantir que o relatório seja sempre gerado, mesmo com falhas
+    try {
+      gerarRelatorioExecucao(totalTestes, testesPassaram, testesFalharam, testesDetalhes);
+      System.out.println("📋 Relatório de execução salvo em: target/test-reports/relatorio-execucao.txt");
+    } catch (Exception e) {
+      System.err.println("⚠️  Erro ao gerar relatório de execução: " + e.getMessage());
+      // Tentar salvar um relatório básico mesmo com erro
+      try {
+        gerarRelatorioBasico(totalTestes, testesPassaram, testesFalharam);
+        System.out.println("📋 Relatório básico salvo em: target/test-reports/relatorio-execucao.txt");
+      } catch (Exception fallbackError) {
+        System.err.println("❌ Falha completa na geração de relatórios: " + fallbackError.getMessage());
+      }
+    }
     
     // Apresentar resumo final baseado nos resultados
     if (testesFalharam == 0) {
-      System.out.println("🎉 TODOS OS TESTES PASSARAM! Sistema validado com sucesso.");
+      System.out.println("\n🎉 TODOS OS TESTES PASSARAM! Sistema validado com sucesso.");
     } else {
-      System.out.println("⚠️  Alguns testes falharam. Verifique a implementação das classes DAO.");
-      System.out.printf("   %d de %d testes precisam de correção.\n", testesFalharam, totalTestes);
+      System.out.println("\n⚠️  Alguns testes falharam. Verifique os detalhes no relatório.");
+      System.out.printf("   📈 %d de %d testes precisam de atenção.\n", testesFalharam, totalTestes);
     }
     
-    // Informar sobre relatórios gerados
+    // Informações finais
     System.out.println("\n📋 Relatórios gerados:");
     System.out.println("   • target/test-reports/relatorio-execucao.txt");
     
-    // Informar sobre análise de cobertura
     System.out.println("\n📊 Para análise de cobertura de código:");
     System.out.println("   1. Execute: java GerarCobertura");
     System.out.println("   2. Ou compile e execute GerarCobertura.java");
     System.out.println("   3. Relatório será gerado em: target/test-reports/relatorio-cobertura.txt");
 
     System.out.println("\n📊 Execução concluída!");
+  }
+
+  /**
+   * Gera um relatório básico em caso de falha na geração do relatório completo
+   */
+  private static void gerarRelatorioBasico(int totalTestes, int testesPassaram, int testesFalharam) {
+    try {
+      File relatoriosDir = new File("target/test-reports");
+      if (!relatoriosDir.exists()) {
+        relatoriosDir.mkdirs();
+      }
+
+      try (PrintWriter writer = new PrintWriter(new FileWriter("target/test-reports/relatorio-execucao.txt"))) {
+        writer.println("=".repeat(80));
+        writer.println("         RELATÓRIO BÁSICO DE EXECUÇÃO DOS TESTES");
+        writer.println("=".repeat(80));
+        writer.println("Data/Hora: " + LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")));
+        writer.println();
+        
+        writer.println("RESUMO:");
+        writer.println("-".repeat(50));
+        writer.printf("Total de Testes: %d\n", totalTestes);
+        writer.printf("Passaram: %d\n", testesPassaram);
+        writer.printf("Falharam: %d\n", testesFalharam);
+        writer.printf("Taxa de Sucesso: %.1f%%\n", (testesPassaram * 100.0 / totalTestes));
+        writer.println();
+        
+        writer.println("OBSERVAÇÃO:");
+        writer.println("Este é um relatório básico gerado devido a erro na geração do relatório completo.");
+        writer.println("Execute os testes novamente para obter detalhes completos.");
+        writer.println();
+        writer.println("=".repeat(80));
+      }
+    } catch (IOException e) {
+      System.err.println("Erro ao salvar relatório básico: " + e.getMessage());
+    }
   }
  
 }

@@ -1,7 +1,7 @@
 ================================================================================
          RELATÓRIO DE COBERTURA DE CÓDIGO - SISTEMA DE MATRÍCULA
 ================================================================================
-Data/Hora: 06/11/2025 11:29:38
+Data/Hora: 06/11/2025 11:35:58
 Ferramenta: JaCoCo (Java Code Coverage Library) - DADOS REAIS
 
 CONFIGURAÇÃO DA COBERTURA:
